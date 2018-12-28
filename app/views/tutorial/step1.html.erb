@@ -1,0 +1,13 @@
+<%= form_with(model: @profile,url: tutorial_step1_post_path,local: true) do |form| %>
+	<div>
+		<%= form.fields_for :movie,form.object.movie.blank? ? form.object.build_movie : form.object.movie do |movie_form| %>
+			<%= movie_form.file_field :file %>
+		<% end %>
+	</div>
+	<div>
+		<%= form.text_area :introduction,rows: 5 %>
+	</div>
+	<div>
+		<%= form.submit "登録" %>
+	</div>
+<% end %>

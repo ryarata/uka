@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+	<%= @competition.title %>
+</div>
+
+<div>
+	<%= @competition.description %>
+</div>
+
+<div>
+	<%= video_tag @competition.movie.file.url %>
+</div>
+
+<div>
+	<%= @competition.apply_guideline %>
+</div>
+
+<div>
+	<%= @competition.get_competition_type_text %>
+</div>
+
+<div>
+	<%= link_to "ENTRY",entry_competition_path(@competition) %>
+</div>
+
+<% @competition.content_reading.readings.each do |r| %>
+<div>
+	<%= "#{r.user_id.blank? ? "未登録ユーザー" : r.user.profile.blank? ? "プロフィール未登録ユーザー" : r.user.profile.user_name}が#{r.get_reading_type_text}しました" %>
+</div>
+<% end %>
+
+<%= link_to 'Edit', edit_competition_path(@competition) %> |
+<%= link_to 'Back', competitions_path %>
