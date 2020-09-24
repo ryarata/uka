@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+	<%= @presentation.title %>
+</div>
+
+<div>
+	<%= @presentation.description %>
+</div>
+
+<div>
+	<%= video_tag @presentation.movie.file.url %>
+</div>
+
+<div>
+	<%= link_to "Request#{@presentation.votes.request_votes.length}",vote_presentation_path(@presentation,vote_type: "true") %><br/>
+	<%= link_to "Evil#{@presentation.votes.evil_votes.length}",vote_presentation_path(@presentation,vote_type: "false") %>
+</div>
+
+<% @presentation.content_reading.readings.each do |r| %>
+<div>
+	<%= "#{r.user_id.blank? ? "未登録ユーザー" : r.user.profile.blank? ? "プロフィール未登録ユーザー" : r.user.profile.user_name}が#{r.get_reading_type_text}しました" %>
+</div>
+<% end %>
+
+<%= link_to 'Edit', edit_presentation_path(@presentation) %> |
+<%= link_to 'Back', presentations_path %>

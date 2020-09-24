@@ -1,0 +1,27 @@
+<% if user_signed_in? %>
+<div>
+	<%= link_to "マイページ",profile_show_path(current_user.profile) %>
+</div>
+<% end %>
+<div>
+	<%= link_to "プレゼンテーション",new_presentation_path %>
+</div>
+
+<div>
+	<%= link_to "コンペ",new_competition_path %>
+</div>
+
+<div>
+	<p>コンペ</p>
+	<% @competitions.each do |competition| %>
+		<%= link_to competition_path(competition) do %><%= video_tag competition.movie.file.url,style: "width: 120px;margin-right: 20px;" %><% end %>
+	<% end %>
+</div>
+
+
+<div>
+	<p>プレゼン</p>
+	<% @presentations.each do |presentation| %>
+		<%= link_to presentation_path(presentation) do %><%= video_tag presentation.movie.file.url,style: "width: 120px;margin-right: 20px;" %><% end %>
+	<% end %>
+</div>

@@ -1,0 +1,44 @@
+<%= form_with(model: competition,url: url, local: true) do |form| %>
+  <% if competition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
+
+      <ul>
+      <% competition.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.text_area :description,rows: 5 %>
+  </div>
+
+  <div>
+    <%= form.fields_for :movie,form.object.movie.present? ? form.object.movie : form.object.build_movie do |movie_field| %>
+      <%= movie_field.file_field :file %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.text_area :apply_guideline,rows: 5 %>
+  </div>
+
+  <div>
+    <label>
+      <%= form.radio_button :competition_type,1 %><span>IDEA</span>
+    </label>
+    <label>
+      <%= form.radio_button :competition_type,2 %><span>RECRUIT</span>
+    </label>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

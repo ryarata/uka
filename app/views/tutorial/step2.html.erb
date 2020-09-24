@@ -1,0 +1,11 @@
+<%= form_with(model: @profile,url: tutorial_step2_post_path,local: true) do |form| %>
+	<div>
+		<%= video_tag @profile.movie.file.url %>
+	</div>
+	<div>
+		<%= form.text_field :user_name %>
+	</div>
+	<div>
+		<%= form.submit "登録" %>
+	</div>
+<% end %>

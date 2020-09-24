@@ -1,0 +1,31 @@
+<%= form_with(model: presentation,url: url, local: true) do |form| %>
+  <% if presentation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(presentation.errors.count, "error") %> prohibited this presentation from being saved:</h2>
+
+      <ul>
+      <% presentation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.text_area :description,rows: 5 %>
+  </div>
+
+  <div>
+    <%= form.fields_for :movie,form.object.movie.present? ? form.object.movie : form.object.build_movie do |movie_field| %>
+      <%= movie_field.file_field :file %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
